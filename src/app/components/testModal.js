@@ -131,40 +131,7 @@ export default function TestModal() {
       if(errors.length!=0) return;
 
       setModalState(modalState=='loading'?'initial':'loading')
-/*
-      await openai.chat.completions.create({
-        model: "gpt-3.5-turbo",
-        stream:true,
-        messages: [
-          {
-            "role": "system",
-            "content": "You are quiz assistant. You generate questions on the topic given at the level given and of given type. If type is mcq, give question with 4 options. End question with appropriate marking like ~Q."
-          },
-          {
-            "role": "user",
-            "content": "\"Topic: Arrays in C\" \"Level: Computer Science Engineering 2nd Year\" \"MCQ:3\"\nThere should be one correct option and that should be on top."
-          },
-          {
-            "role": "assistant",
-            "content": "Q:How do you initialize array in C?~Q\nint arr[3] = {1,2,3};\nint arr(3) = (1,2,3);\nint arr[3] = (1,2,3);\nint arr(3) = {1,2,3};~S\nQ:In most programming languages, array indices typically start at:~Q\n0\n-1\n1\nundefined~S\nQ:What is the time complexity of accessing an element in an array by its index?~Q\nO(1)\nO(n)\nO(log n)\nO(n^2)~S"
-          },
-          {
-            "role": "user",
-            "content": `\"Topic: ${queryTopic}\" \"Level: ${queryLevel}\" \"MCQ:${quesCount}\"\nThere should be one correct option and that should be on top.`
-          }
-        ],
-        temperature: 1,
-      }).then((async response=>{
 
-        console.log(response)
-        for (const chunk of response) {
-          console.log(chunk.choices[0].delta.content);
-        }
-        return
-        
-    */
-
-      console.log('Generation Should start now!')
       const response = await openai.chat.completions.create({
         model: "gpt-3.5-turbo",
         messages:  [{
@@ -189,7 +156,6 @@ export default function TestModal() {
     
       let mainResponse="";
       for await (const chunk of response) {
-        console.log(chunk.choices[0].delta.content);
         mainResponse+=chunk.choices[0].delta.content;
         let chunktext=document.createElement('div')
         chunktext.innerText=chunk.choices[0].delta.content;
@@ -198,7 +164,6 @@ export default function TestModal() {
         mainRef.current.appendChild(chunktext)
       }
 
-      //console.log(response.usage.total_tokens);
         //let mainResponse=response.choices[0].message.content;
         let respParts=mainResponse.split('~S');
         let filteredResponse={
@@ -210,8 +175,6 @@ export default function TestModal() {
           if(index!=quesCount){
               let respQuestion=respPart.substring(respPart.indexOf('Q:')+2,respPart.indexOf('~Q'));
               let respOptions=respPart.substring(respPart.indexOf('~Q')+3).split('\n');
-              console.log(respQuestion);
-              console.log(respOptions);
               filteredResponse.questions.push({type:'MCQ',question:respQuestion,options:respOptions});
           }
         })
@@ -236,8 +199,6 @@ export default function TestModal() {
           if(index!=quesCount){
               let respQuestion=respPart.substring(respPart.indexOf('Q:')+2,respPart.indexOf('~Q'));
               let respOptions=respPart.substring(respPart.indexOf('~Q')+3).split('\n');
-              console.log(respQuestion);
-              console.log(respOptions);
               filteredResponse.questions.push({type:'MCQ',question:respQuestion,options:respOptions});
           }
         })
@@ -250,7 +211,6 @@ export default function TestModal() {
     }*/
 
     async function generationComplete(responses){
-      console.log(responses);
       setModalPosition(modalsInitialPosition[quesCount-1]);
       //setQuestionModals(questions)
       setResponseQuestion(responses);
