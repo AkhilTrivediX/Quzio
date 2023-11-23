@@ -1,0 +1,30 @@
+
+.main{
+  width: 100vw;
+  height: 100vh;
+  
+}
+
+.backgroundElementsGroup{
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  z-index: -5;
+  overflow: hidden;
+  background-color: rgba(5,4,22, 1);
+}
+
+
+.backgroundBall{
+  display: block;
+	width: 300px;
+  aspect-ratio: 1;
+	border-radius: 50%;
+  position: absolute;
+  background: radial-gradient(circle at 65% 15%, white 1px, aqua 3%, darkblue 60%, aqua 100%);  
+}
+
+.mainArea{
+  width: 100%;
+  height: 100%;
+}
