@@ -191,12 +191,11 @@ export default function TestModal() {
       for await (const chunk of response) {
         console.log(chunk.choices[0].delta.content);
         mainResponse+=chunk.choices[0].delta.content;
-        if(chunk.choices[0].delta.content.length>2){
         let chunktext=document.createElement('div')
         chunktext.innerText=chunk.choices[0].delta.content;
         chunktext.className=styles.chunkText;
         chunktext.style.left=`${Math.floor(Math.random()*((90-10+1))+1)+10}%`
-        mainRef.current.appendChild(chunktext)}
+        mainRef.current.appendChild(chunktext)
       }
 
       //console.log(response.usage.total_tokens);
