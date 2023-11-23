@@ -21,7 +21,6 @@ function CreateMCQ({ position, question, options, quesStatus, setQuesStatus }) {
     if(options[x].indexOf('(Correct)')!=-1){
       options[x]=options[x].substring(0,options[x].indexOf('(Correct)'));
       if(x!=0){
-        console.log('Corrected Listing Error')
         let temp=options[0];
         options[0]=options[x];
         options[x]=temp;
@@ -34,8 +33,6 @@ function CreateMCQ({ position, question, options, quesStatus, setQuesStatus }) {
   
 
   function choseOption(e,optionNumber) {
-    console.log('Running choseOption for '+position+' as '+quesStatus[position])
-    console.log(quesStatus)
     if(quesStatus[position]!='listed') return console.log('Found '+quesStatus[position]);
     if (optionNumber === 0) {
       setQuesStatus((prevStatus) => {
