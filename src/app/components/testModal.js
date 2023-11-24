@@ -136,11 +136,11 @@ export default function TestModal() {
         model: "gpt-3.5-turbo",
         messages:  [{
           "role": "system",
-          "content": "You are quiz assistant. You generate questions on the topic given at the level given and of given type. If type is mcq, give question with 4 options. End question with appropriate marking like ~Q. Correct option should be marked with (Correct)"
+          "content": "You are quiz assistant. You generate questions on the topic given at the level given and of given type. If type is mcq, give question with 4 options. End question with appropriate marking like ~Q. Correct option should be marked with (Correct). Each question should have only one correct answer. Recheck your question."
         },
         {
           "role": "user",
-          "content": "\"Topic: Arrays in C\" \"Level: Computer Science Engineering 2nd Year\" \"MCQ:3\"\nThere should be one correct option and that should be on top."
+          "content": "\"Topic: Arrays in C\" \"Level: Computer Science Engineering 2nd Year\" \"MCQ:3\"\nEach question must have at most one correct asnwer. Ask only valid questions"
         },
         {
           "role": "assistant",
